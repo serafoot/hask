@@ -35,5 +35,20 @@ numPrimi n = [x | x <- [2..n], primo x]
 
 trova :: Eq a => a -> [(a,b)] -> [b]
 trova k ts = [v | (k',v) <- ts, k == k'] -- I can't call k the first elem in ts
- 
+
+-- accoppia creates a list of pairs from adjacent elements in a list
+accoppia :: [a] -> [(a,a)]
+accoppia xs =  zip xs (tail xs)
+
+-- ordinato checks if a a list is ordered looking at all pairs 
+-- of adjacent elements 
+ordinato :: Ord a => [a] -> Bool
+ordinato xs = and [x <= y | (x,y) <- accoppia xs]
+
+-- posizioni returns the list of all positions at which a value occurs
+-- ina list
+posizioni :: Eq a => a -> [a] -> [Int]
+posizioni x xs = [i | (x',i) <- zip xs [0..], x == x']
+
+
 
